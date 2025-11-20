@@ -757,4 +757,69 @@ class PublicController extends Controller
         session()->forget(['customer_id', 'customer_name', 'customer_mobile', 'location_id']);
         return redirect()->route('welcome')->with('success', 'Logged out successfully.');
     }
+    public function locationMenuApi($locationId)
+{
+    $location = Location::findOrFail($locationId);
+
+    $categories = FoodCategory::select('food_categories.*')
+        ->join('food_menus', 'food_menus.category_id', '=', 'food_categories.id')
+        ->join('food_price', 'food_price.food_id', '=', 'food_menus.id')
+        ->where('food_price.location_id', $locationId)
+        ->distinct()
+        ->get();
+
+    $foodMenu = FoodMenu::select('food_menus.*', 'food_price.price', 'food_categories.name as category', 'food_categories.image as category_image')
+        ->join('food_price', 'food_price.food_id', '=', 'food_menus.id')
+        ->leftJoin('food_categories', 'food_categories.id', '=', 'food_menus.category_id')
+        ->where('food_price.location_id', $locationId)
+        ->orderBy('food_categories.name')
+        ->get();
+
+    // Convert images to full URLs for the client
+    $categories = $categories->map(function($cat) {
+        $cat->image = $cat->image ? asset(str_replace('\\','/',$cat->image)) : null;
+        return $cat;
+    });
+
+    $foodMenu = $foodMenu->map(function($item) {
+        // If category_image was stored as Windows path, normalize and turn to asset URL
+        $item->category_image = $item->category_image ? asset(str_replace('\\','/',$item->category_image)) : null;
+        return $item;
+    });
+
+    // cart stuff unchanged...
+    $cartItems = [];
+    $cartTotal = 0;
+    $cartCount = 0;
+
+    if (session('customer_id')) {
+        $carts = Cart::where('user_id', session('customer_id'))
+            ->where('location_id', $locationId)
+            ->with('food')
+            ->get();
+
+        foreach ($carts as $cart) {
+            $cartItems[] = [
+                'id' => $cart->food_id,
+                'name' => $cart->food->name,
+                'price' => $cart->getPrice(),
+                'quantity' => $cart->quantity,
+                'total' => $cart->getTotalPrice()
+            ];
+            $cartTotal += $cart->getTotalPrice();
+            $cartCount += $cart->quantity;
+        }
+    }
+
+    return response()->json([
+        'location'   => $location,
+        'categories' => $categories,
+        'foodMenu'   => $foodMenu,
+        'cartItems'  => $cartItems,
+        'cartTotal'  => $cartTotal,
+        'cartCount'  => $cartCount,
+        'currency'   => $location->currency
+    ]);
+}
+
 }
