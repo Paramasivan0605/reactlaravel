@@ -1,0 +1,149 @@
+:root{--primary-red:#dc2626;--accent:#f97316;--dark-red:#991b1b}
+
+.lm-root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+.lm-header{position:relative;padding:48px 0 40px;color:#fff;overflow:hidden}
+.lm-header-overlay{position:absolute;inset:0;background-image:url('/images/bg-image.jpeg');opacity:0.12;background-size:cover}
+.lm-header-inner{position:relative;display:flex;justify-content:space-between;align-items:center}
+.lm-location-card{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));padding:18px;border-radius:18px;backdrop-filter:blur(8px)}
+.lm-location-icon{width:72px;height:72px;border-radius:14px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:28px}
+.lm-now-serving{font-weight:700;opacity:0.95}
+.lm-location-name{font-size:28px;margin:6px 0}
+.lm-pill{display:inline-block;background:rgba(255,255,255,0.12);padding:6px 12px;border-radius:999px;margin-right:8px}
+.lm-delivery-btn{background:rgba(0,0,0,0.08);border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:12px;color:#fff}
+
+.lm-categories{padding:8px 0}
+.lm-categories-scroll{display:flex;gap:12px;overflow:auto;padding:6px}
+.lm-category{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;border:2px solid #eee;background:#fff;cursor:pointer;min-width:120px}
+.lm-category.active{background:linear-gradient(135deg,var(--primary-red),var(--accent));color:#fff;border-color:transparent;box-shadow:0 8px 30px rgba(220,38,38,0.18)}
+.lm-category img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+
+.lm-main{padding-top:18px}
+.lm-food-grid .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.food-card{position:relative;border-radius:18px;overflow:hidden;min-height:180px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.card-bg img{width:100%;height:100%;object-fit:cover;filter:blur(8px) brightness(0.7);transform:scale(1.05)}
+.card-bg .gradient-bg{width:100%;height:100%;background:linear-gradient(135deg,var(--primary-red),var(--accent));filter:blur(6px)}
+.card-content{position:relative;padding:18px;background:rgba(255,255,255,0.94);min-height:180px}
+.tag{display:inline-block;background:linear-gradient(135deg,var(--primary-red),var(--accent));color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;margin-bottom:8px}
+.food-name{font-weight:800;font-size:18px;margin:6px 0}
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.price{font-weight:900;color:var(--primary-red);font-size:20px}
+.add-btn{background:linear-gradient(135deg,var(--primary-red),var(--accent));color:#fff;padding:10px 12px;border-radius:999px;border:none}
+
+/* Modal styles (shared) */
+.lm-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:9999}
+.lm-modal{width:92%;max-width:760px;background:#fff;border-radius:16px;overflow:hidden}
+.lm-modal-header{padding:24px;text-align:center;background:linear-gradient(135deg,var(--primary-red),var(--accent));color:#fff}
+.lm-modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:18px}
+.lm-option{background:#fff;border-radius:14px;padding:18px;border:1px solid #eee;position:relative;cursor:pointer}
+.lm-option-emoji{font-size:36px}
+.lm-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,var(--primary-red),var(--accent));color:#fff;padding:6px 8px;border-radius:12px;font-weight:700}
+
+/* Item modal specifics */
+.lm-item-modal .modal-bg img{width:100%;height:200px;object-fit:cover;filter:blur(14px) brightness(0.6)}
+.lm-item-modal .modal-header{display:flex;justify-content:space-between;align-items:center;padding:18px}
+.lm-item-modal .modal-body{padding:18px}
+.price-box{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.confirm-btn{background:linear-gradient(135deg,var(--dark-red),var(--primary-red));color:#fff;padding:12px 18px;border-radius:12px;border:none}
+
+/* Loader */
+.lm-loader{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.loader-box{display:flex;gap:8px}
+.loader-box .dot{width:12px;height:12px;border-radius:50%;background:rgba(0,0,0,0.15);animation:blink 1s infinite}
+.loader-box .dot:nth-child(2){animation-delay:0.1s}
+.loader-box .dot:nth-child(3){animation-delay:0.2s}
+@keyframes blink{0%,100%{opacity:0.2}50%{opacity:1}}
+
+
+/* --- Swiggy / Zomato Food Card Design --- */
+
+.swiggy-grid-section {
+  margin-top: 20px;
+  padding-bottom: 60px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  padding-left: 12px;
+}
+
+/* Smooth scrolling for mobile */
+.swiggy-food-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 12px;
+}
+
+/* Card */
+.swiggy-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  transition: transform 0.15s ease;
+}
+
+.swiggy-card:active {
+  transform: scale(0.98);
+}
+
+/* Image */
+.swiggy-card-image img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Info Section */
+.swiggy-card-info {
+  flex: 1;
+}
+
+.swiggy-food-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.swiggy-food-desc {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.swiggy-price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.swiggy-currency {
+  font-size: 14px;
+}
+
+.swiggy-price {
+  font-size: 18px;
+}
+
+/* Add button */
+.swiggy-add-btn {
+  margin-top: 6px;
+  border: 1px solid #ff8800;
+  background: #fff7ec;
+  color: #ff6600;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  width: fit-content;
+}
