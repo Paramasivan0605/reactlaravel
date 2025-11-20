@@ -7,24 +7,29 @@ export default function FoodItem({ item, currency, onOpen }) {
         <img
           src={item.category_image || "/images/placeholder-food.jpg"}
           alt={item.name}
+          onError={(e) => {
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'flex';
+          }}
         />
+        <div style={{display: 'none', width: '100%', height: '100%', background: '#f8f8f8', alignItems: 'center', justifyContent: 'center', fontSize: '20px'}}>
+          🍽️
+        </div>
       </div>
 
       <div className="swiggy-card-info">
         <h3 className="swiggy-food-name">{item.name}</h3>
 
         {item.description && (
-          <p className="swiggy-food-desc">{item.description.slice(0, 40)}...</p>
+          <p className="swiggy-food-desc">{item.description}</p>
         )}
 
-        <div className="swiggy-price-row">
-          <span className="swiggy-currency">{currency}</span>
+        <div className="swiggy-card-bottom">
           <span className="swiggy-price">
-            {parseFloat(item.price).toFixed(2)}
+            {currency} {parseFloat(item.price).toFixed(2)}
           </span>
+          <button className="swiggy-add-btn">ADD +</button>
         </div>
-
-        <button className="swiggy-add-btn">ADD +</button>
       </div>
     </div>
   );

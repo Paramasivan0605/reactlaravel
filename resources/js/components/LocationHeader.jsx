@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function LocationHeader({ location, currency, onChooseDelivery }) {
   return (
-    <header className="lm-header" style={{ backgroundImage: 'linear-gradient(135deg,#dc2626 0%,#f97316 100%)' }}>
+    <header className="lm-header">
       <div className="lm-header-overlay" />
       <div className="lm-header-inner container">
         <div className="lm-location-card">
@@ -13,12 +13,15 @@ export default function LocationHeader({ location, currency, onChooseDelivery })
             <div className="lm-meta">
               <span className="lm-pill">{currency}</span>
               <span className="lm-pill">Open Now</span>
+              <span className="lm-pill">YES MEMBER</span>
             </div>
           </div>
         </div>
 
         <div className="lm-actions">
-          <button className="lm-delivery-btn" onClick={onChooseDelivery}>Choose Order Type</button>
+          <button className="lm-delivery-btn" onClick={onChooseDelivery}>
+            ORDER NOW
+          </button>
         </div>
       </div>
     </header>
